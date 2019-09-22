@@ -3,7 +3,7 @@
 var BASE_LEFT = 110;
 var BASE_TOP = 10;
 var SHADOW_OFFSET = 10;
-var SHADOW_COLOR = "rgba(0, 0, 0, 0.7)";
+var SHADOW_COLOR = 'rgba(0, 0, 0, 0.7)';
 var CLOUD_WIDTH = 420;
 var CLOUD_HEIGHT = 270;
 var CLOUD_COLOR = 'white';
@@ -11,7 +11,7 @@ var CLOUD_STROKE_COLOR = 'black';
 var CLOUD_PADDING = 30;
 var FONT_COLOR = CLOUD_STROKE_COLOR;
 var FONT_SIZE = 16;
-var FONT = FONT_SIZE + "px PT Mono";
+var FONT = FONT_SIZE + 'px PT Mono';
 var TEXT_MARGIN_TOP = 5;
 
 var histogramHeight = 150;
@@ -21,7 +21,7 @@ var myColor = 'rgba(255, 0, 0, 1)';
 
 var getRandomLightnessBlueColor = function () {
   var random = Math.ceil(Math.random() * 100);
-  return 'hsl(240, 100%, ' + random + '%)';
+  return 'hsl(240, ' + random + '%, 50%)';
 };
 
 var drawCloud = function (ctx) {
@@ -34,11 +34,13 @@ var drawCloud = function (ctx) {
   ctx.strokeRect(BASE_LEFT, BASE_TOP, CLOUD_WIDTH, CLOUD_HEIGHT);
 };
 
-var drawCongrats = function (ctx) {
+var drawCongrats = function (ctx, text) {
   ctx.font = FONT;
   ctx.fillStyle = FONT_COLOR;
-  ctx.fillText("Ура вы победили!", BASE_LEFT + CLOUD_PADDING, BASE_TOP + CLOUD_PADDING);
-  ctx.fillText("Список результатов:", BASE_LEFT + CLOUD_PADDING, BASE_TOP + FONT_SIZE + CLOUD_PADDING + TEXT_MARGIN_TOP);
+  var splittedText = text.split('\n');
+  for (var i = 0; i < splittedText.length; i++) {
+    ctx.fillText(splittedText[i], BASE_LEFT + CLOUD_PADDING, BASE_TOP + CLOUD_PADDING + i * (FONT_SIZE + TEXT_MARGIN_TOP));
+  }
 };
 
 var drawHistogram = function (ctx, names, times) {
@@ -47,7 +49,7 @@ var drawHistogram = function (ctx, names, times) {
   for (var i = 0; i < names.length; i++) {
     var time = Math.round(times[i]);
 
-    ctx.fillStyle = (names[i].toLowerCase() === 'вы') ? myColor : getRandomLightnessBlueColor();
+    ctx.fillStyle = (names[i] === 'Вы') ? myColor : getRandomLightnessBlueColor();
 
     var barHeight = Math.round(time * histogramHeight / timesMax);
 
@@ -62,7 +64,7 @@ var drawHistogram = function (ctx, names, times) {
 
 window.renderStatistics = function (ctx, names, times) {
   drawCloud(ctx);
-  drawCongrats(ctx);
+  drawCongrats(ctx, 'Ура вы победили!\nСписок результатов:');
   drawHistogram(ctx, names, times);
 };
 
