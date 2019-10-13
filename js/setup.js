@@ -12,7 +12,7 @@ var getRandomNumber = function (min, max) {
 };
 
 var getRandomElement = function (array) {
-  return array[getRandomNumber(0, array.length - 1)].trim();
+  return array[getRandomNumber(0, array.length - 1)];
 };
 
 var getRandomName = function () {
@@ -49,7 +49,7 @@ var getDOMElementFromCharacter = function (character) {
   element.querySelector('.wizard-coat').style.fill = character.coatColor;
   element.querySelector('.wizard-eyes').style.fill = character.eyesColor;
   return element;
-}
+};
 
 var fillSimilarList = function (quantity) {
   var fragment = document.createDocumentFragment();
@@ -61,5 +61,11 @@ var fillSimilarList = function (quantity) {
   document.querySelector('.setup-similar').classList.remove('hidden');
 };
 
+var showSetupBlock = function () {
+  document.querySelector('.setup').classList.remove('hidden');
+}
+
 fillSimilarList(QUANTITY);
-document.querySelector('.setup').classList.remove('hidden');
+showSetupBlock();
+
+
