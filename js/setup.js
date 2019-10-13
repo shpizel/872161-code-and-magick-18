@@ -63,7 +63,7 @@ var fillSimilarList = function (quantity) {
 
 var showSetupBlock = function () {
   document.querySelector('.setup').classList.remove('hidden');
-}
+};
 
 fillSimilarList(QUANTITY);
 showSetupBlock();
