@@ -34,7 +34,7 @@ var getRandomCharacter = function () {
   };
 };
 
-var genearateRandomCharacters = function (quantity) {
+var generateRandomCharacters = function (quantity) {
   var characters = [];
   for (var i = 0; i < quantity; i++) {
     characters.push(getRandomCharacter());
@@ -53,7 +53,7 @@ var getDOMElementFromCharacter = function (character) {
 
 var fillSimilarList = function (quantity) {
   var fragment = document.createDocumentFragment();
-  var characters = genearateRandomCharacters(quantity);
+  var characters = generateRandomCharacters(quantity);
   for (var i = 0; i < characters.length; i++) {
     fragment.appendChild(getDOMElementFromCharacter(characters[i]));
   }
